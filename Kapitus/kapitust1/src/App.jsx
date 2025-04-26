@@ -164,7 +164,7 @@ export default function ABTestAnalyzer() {
   setShowResultsSection(true);
 
   // Now generate Confidence Level vs Duration Graph Data
-  const confidenceLevels = [70, 75, 80, 85, 90, 95, 99];
+  const confidenceLevels = [80, 85, 90, 95, 99];
   const simulatedData = confidenceLevels.map(level => {
     const zAlpha = zScores[testType][level];
     const zBeta = powerScores[power];
