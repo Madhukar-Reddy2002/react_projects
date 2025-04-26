@@ -617,102 +617,125 @@ export default function ABTestAnalyzer() {
       
       {/* Results Section for Duration Calculator */}
       {showResultsSection && durationResults && showDurationSection && (
-        <div className="mb-8">
-          <div className="backdrop-blur-md bg-white/70 rounded-2xl shadow-xl p-6 md:p-8 mb-6">
-            <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4 pb-2 border-b-2 border-blue-200">Test Duration Results</h2>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="backdrop-blur-sm bg-white/50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                <h3 className="text-xl font-semibold text-blue-600 mb-4">Duration Analysis</h3>
-                
-                <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-1 rounded-lg shadow-lg">
-                  <div className="bg-white p-5 rounded-md">
-                    <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2 text-center">
-                      {durationResults.duration} days
-                    </p>
-                    <p className="text-gray-600 text-center">Recommended test duration</p>
-                  </div>
-                </div>
-                
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-white/60 rounded-lg shadow-inner backdrop-blur-sm">
-                    <p className="font-semibold text-gray-800">Total Sample Size</p>
-                    <p className="text-xl font-bold text-blue-600">{durationResults.samplesNeeded.toLocaleString()}</p>
-                    <p className="text-sm text-gray-600">visitors needed</p>
-                  </div>
-                  <div className="p-4 bg-white/60 rounded-lg shadow-inner backdrop-blur-sm">
-                    <p className="font-semibold text-gray-800">Per Variant</p>
-                    <p className="text-xl font-bold text-blue-600">{durationResults.samplesPerVariant.toLocaleString()}</p>
-                    <p className="text-sm text-gray-600">visitors per variant</p>
-                  </div>
-                </div>
-                
-                <div className="mt-6">
-                  <h4 className="font-semibold text-gray-700 mb-2">Statistical Parameters</h4>
-                  <div className="bg-white/60 rounded-lg shadow-inner p-4 backdrop-blur-sm">
-                    <table className="w-full text-sm">
-                      <tbody>
-                        <tr>
-                          <td className="py-2 text-gray-600">Test Type:</td>
-                          <td className="py-2 font-medium text-gray-800">{testType === 'one_tailed' ? 'One-Tailed' : 'Two-Tailed'}</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Confidence Level:</td>
-                          <td className="py-2 font-medium text-gray-800">{confidenceLevel}%</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Statistical Power:</td>
-                          <td className="py-2 font-medium text-gray-800">{power}%</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Z-Alpha:</td>
-                          <td className="py-2 font-medium text-gray-800">{durationResults.zAlpha.toFixed(4)}</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Z-Beta:</td>
-                          <td className="py-2 font-medium text-gray-800">{durationResults.zBeta.toFixed(4)}</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Confidence Constant:</td>
-                          <td className="py-2 font-medium text-gray-800">{durationResults.confidenceConstant.toFixed(4)}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                                  </div>
-              </div>
-            </div>
+  <div className="mb-8">
+    <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-2xl shadow-2xl p-6 md:p-10 mb-8">
+      
+      {/* Section Header */}
+      <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-8 text-center tracking-tight">
+        Test Duration Results
+      </h2>
 
-            {/* Duration vs Uplift Graph */}
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold text-blue-600 mb-4">Duration vs Uplift Chart</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={durationResults.chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#c7d2fe" />
-                  <XAxis dataKey="uplift" stroke="#6366f1" />
-                  <YAxis stroke="#6366f1" />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="days" stroke="#6366f1" strokeWidth={3} activeDot={{ r: 6 }} />
-                </LineChart>
-              </ResponsiveContainer>
+      {/* Flex Container for Results + Graphs */}
+      <div className="flex flex-col lg:flex-row gap-8 items-center">
+
+        {/* Left: Duration Analysis */}
+        <div className="w-full lg:w-1/2 backdrop-blur-md bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-2xl transition duration-300">
+
+          <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">Duration Analysis</h3>
+
+          {/* Main Result */}
+          <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-1 rounded-xl shadow-lg mb-6">
+            <div className="bg-white/90 p-6 rounded-lg">
+              <p className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 text-center mb-2">
+                {durationResults.duration} days
+              </p>
+              <p className="text-center text-gray-600 font-medium">Recommended Test Duration</p>
             </div>
-            <div className="mt-12">
-  <h3 className="text-xl font-semibold text-blue-600 mb-4">Confidence Level vs Test Duration</h3>
-  <ResponsiveContainer width="100%" height={300}>
-    <LineChart data={confidenceVsDurationData}>
-      <CartesianGrid strokeDasharray="3 3" stroke="#c7d2fe" />
-      <XAxis dataKey="confidenceLevel" stroke="#6366f1" />
-      <YAxis stroke="#6366f1" />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="duration" stroke="#60a5fa" strokeWidth={3} activeDot={{ r: 6 }} />
-    </LineChart>
-  </ResponsiveContainer>
-  </div>
           </div>
+
+          {/* Samples Info */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white/60 p-4 rounded-lg backdrop-blur-sm shadow-inner">
+              <p className="font-semibold text-gray-700 mb-1">Total Sample Size</p>
+              <p className="text-xl font-bold text-blue-600">{durationResults.samplesNeeded.toLocaleString()}</p>
+              <p className="text-xs text-gray-500">visitors needed</p>
+            </div>
+            <div className="bg-white/60 p-4 rounded-lg backdrop-blur-sm shadow-inner">
+              <p className="font-semibold text-gray-700 mb-1">Per Variant</p>
+              <p className="text-xl font-bold text-blue-600">{durationResults.samplesPerVariant.toLocaleString()}</p>
+              <p className="text-xs text-gray-500">visitors per variant</p>
+            </div>
+          </div>
+
+          {/* Expandable Statistical Parameters */}
+          <details className="mt-6 bg-blue-50/70 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
+            <summary className="font-semibold text-blue-700 cursor-pointer">
+              📈 View Statistical Parameters
+            </summary>
+            <div className="mt-4 text-sm text-blue-800 leading-relaxed">
+              <table className="w-full text-sm">
+                <tbody>
+                  <tr>
+                    <td className="py-2 text-gray-600">Test Type:</td>
+                    <td className="py-2 font-medium text-gray-800">{testType === 'one_tailed' ? 'One-Tailed' : 'Two-Tailed'}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-gray-600">Confidence Level:</td>
+                    <td className="py-2 font-medium text-gray-800">{confidenceLevel}%</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-gray-600">Statistical Power:</td>
+                    <td className="py-2 font-medium text-gray-800">{power}%</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-gray-600">Z-Alpha:</td>
+                    <td className="py-2 font-medium text-gray-800">{durationResults.zAlpha.toFixed(4)}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-gray-600">Z-Beta:</td>
+                    <td className="py-2 font-medium text-gray-800">{durationResults.zBeta.toFixed(4)}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-gray-600">Confidence Constant:</td>
+                    <td className="py-2 font-medium text-gray-800">{durationResults.confidenceConstant.toFixed(4)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
         </div>
-      )}
+
+        {/* Right: Graphs */}
+        <div className="w-full lg:w-1/2 flex flex-col gap-8">
+
+          {/* Graph 1: Duration vs Uplift */}
+          <div className="backdrop-blur-md bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-2xl transition duration-300">
+            <h3 className="text-xl font-bold text-blue-700 mb-4 text-center">Duration vs Uplift</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={durationResults.chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#c7d2fe" />
+                <XAxis dataKey="uplift" stroke="#6366f1" />
+                <YAxis stroke="#6366f1" />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="days" stroke="#6366f1" strokeWidth={3} activeDot={{ r: 6 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Graph 2: Confidence vs Duration */}
+          <div className="backdrop-blur-md bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-2xl transition duration-300">
+            <h3 className="text-xl font-bold text-blue-700 mb-4 text-center">Confidence Level vs Duration</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={confidenceVsDurationData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#c7d2fe" />
+                <XAxis dataKey="confidenceLevel" stroke="#6366f1" />
+                <YAxis stroke="#6366f1" />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="duration" stroke="#60a5fa" strokeWidth={3} activeDot={{ r: 6 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+)}
 
       {/* Test Results Analysis Section */}
       {showResultsSection && analysisResults && showAnalysisSection && (
