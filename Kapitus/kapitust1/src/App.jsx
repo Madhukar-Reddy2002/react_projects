@@ -643,10 +643,10 @@ export default function ABTestAnalyzer() {
               <td className="px-6 py-4">-</td>
             </tr>
 
-            {/* Variants and Required Conversions */}
+            {/* Variants and Additional Conversions Table */}
             {analysisResults.variants.map((v, idx) => (
-              <>
-                <tr key={`variant-${idx}`} className="hover:bg-blue-50 transition duration-300">
+              <React.Fragment key={idx}>
+                <tr className="hover:bg-blue-50 transition duration-300">
                   <td className="px-6 py-4 font-semibold">Variant {v.variant}</td>
                   <td className="px-6 py-4">{v.visitors}</td>
                   <td className="px-6 py-4">{v.conversions}</td>
@@ -660,56 +660,40 @@ export default function ABTestAnalyzer() {
                   </td>
                 </tr>
 
-                {analysisResults.variants.map((v, idx) => (
-  <>
-    <tr key={`variant-${idx}`} className="hover:bg-blue-50 transition duration-300">
-      <td className="px-6 py-4 font-semibold">Variant {v.variant}</td>
-      <td className="px-6 py-4">{v.visitors}</td>
-      <td className="px-6 py-4">{v.conversions}</td>
-      <td className="px-6 py-4">{v.conversionRate.toFixed(2)}%</td>
-      <td className="px-6 py-4">{v.uplift.toFixed(2)}%</td>
-      <td className="px-6 py-4">{v.confidence.toFixed(2)}%</td>
-      <td className="px-6 py-4">
-        <span className={`px-3 py-1 rounded-full text-white text-xs ${v.isSignificant ? 'bg-green-500' : 'bg-gray-400'}`}>
-          {v.isSignificant ? 'Yes' : 'No'}
-        </span>
-      </td>
-    </tr>
-
-    {/* Additional Conversions Table */}
-    <tr key={`required-${idx}`} className="bg-white/90">
-      <td colSpan="7" className="px-6 py-4">
-        <div className="bg-blue-50/60 p-4 rounded-lg backdrop-blur-sm shadow-inner">
-          <h4 className="text-sm font-semibold text-blue-600 mb-2">
-            Additional Conversions Needed to Achieve Significance:
-          </h4>
-          <table className="text-sm w-full">
-            <thead>
-              <tr>
-                <th className="text-left py-1 px-2">Confidence Level</th>
-                <th className="text-left py-1 px-2">Additional Needed</th>
-                <th className="text-left py-1 px-2">Current Conversions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {v.requiredConversionsTable.map((r, i) => (
-                <tr key={i}>
-                  <td className="py-1 px-2">{r.level}%</td>
-                  <td className="py-1 px-2">
-                    {Math.max(0, r.conversions - r.current)}
+                {/* Additional Conversions */}
+                <tr className="bg-white/90">
+                  <td colSpan="7" className="px-6 py-4">
+                    <div className="bg-blue-50/60 p-4 rounded-lg backdrop-blur-sm shadow-inner">
+                      <h4 className="text-sm font-semibold text-blue-600 mb-2">
+                        Additional Conversions Needed to Achieve Significance:
+                      </h4>
+                      <table className="text-sm w-full">
+                        <thead>
+                          <tr>
+                            <th className="text-left py-1 px-2">Confidence Level</th>
+                            <th className="text-left py-1 px-2">Additional Needed</th>
+                            <th className="text-left py-1 px-2">Current Conversions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {v.requiredConversionsTable.map((r, i) => {
+                            const additionalNeeded = Math.max(0, r.conversions - r.current);
+                            return (
+                              <tr key={i}>
+                                <td className="py-1 px-2">{r.level}%</td>
+                                <td className={`py-1 px-2 font-semibold ${additionalNeeded === 0 ? 'text-green-600' : 'text-yellow-600'}`}>
+                                  {additionalNeeded}
+                                </td>
+                                <td className="py-1 px-2">{r.current}</td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
                   </td>
-                  <td className="py-1 px-2">{r.current}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </td>
-    </tr>
-  </>
-))}
-
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
