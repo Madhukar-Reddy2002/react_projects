@@ -565,16 +565,41 @@ export default function ABTestAnalyzer() {
 
           {/* Number of Variants */}
           <div>
-            <label className="block text-gray-700 mb-2 font-semibold">Number of Variants (including Control)</label>
-            <input
-              type="number"
-              min="2"
-              max="5"
-              value={numVariants}
-              onChange={(e) => handleVariantCountChange(e.target.value)}
-              className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-            />
-          </div>
+  <label className="block text-gray-700 mb-2 font-semibold">Number of Variants (including Control)</label>
+
+  <div className="flex items-center space-x-3">
+    {/* Minus Button */}
+    <button
+      type="button"
+      onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
+      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
+      disabled={numVariants <= 2}
+    >
+      −
+    </button>
+
+    {/* Number Display */}
+    <input
+      type="number"
+      min="2"
+      max="5"
+      value={numVariants}
+      onChange={(e) => handleVariantCountChange(e.target.value)}
+      className="w-20 text-center p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+    />
+
+    {/* Plus Button */}
+    <button
+      type="button"
+      onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
+      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
+      disabled={numVariants >= 5}
+    >
+      +
+    </button>
+  </div>
+
+</div>
         </div>
 
         {/* Expandable Statistical Info */}
