@@ -443,18 +443,47 @@ export default function ABTestAnalyzer() {
 
           {/* Expandable Formula Section */}
           <details className="mt-8 bg-blue-50/70 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
-            <summary className="font-semibold text-blue-700 cursor-pointer">
-              View Calculation Formula
-            </summary>
-            <div className="mt-4 text-sm text-blue-800 leading-relaxed">
-              <p><strong>Test Duration (Days)</strong> = (Variants × Confidence Constant × (√(CR × (1-CR)) ÷ (CR × Uplift))²) ÷ Daily Visitors</p>
-              <p className="mt-2"><strong>Confidence Constant</strong> = 2 × (Zα + Zβ)²</p>
-              <p className="mt-2 text-gray-600">
-                Where CR = Baseline Conversion Rate, Uplift = Minimum Detectable Effect,  
-                Zα = Z-Score for Confidence Level, Zβ = Z-Score for Statistical Power.
-              </p>
-            </div>
-          </details>
+  <summary className="font-semibold text-blue-700 cursor-pointer">
+    📈 View Test Duration Formula & Terms
+  </summary>
+  <div className="mt-4 text-sm text-blue-800 leading-relaxed space-y-4">
+
+    {/* Formula */}
+    <div>
+      <p className="font-semibold mb-2">Test Duration (Days):</p>
+      <p className="bg-blue-100 p-3 rounded-lg shadow-inner text-blue-900">
+        (Variants × Confidence Constant × (√(CR × (1 - CR)) ÷ (CR × Uplift))²) ÷ Daily Visitors
+      </p>
+    </div>
+
+    {/* Confidence Constant */}
+    <div className="mt-6">
+      <p className="font-semibold mb-2">Confidence Constant:</p>
+      <p className="bg-blue-100 p-3 rounded-lg shadow-inner text-blue-900">
+        Confidence Constant = 2 × (Zα + Zβ)²
+      </p>
+    </div>
+
+    {/* Definitions */}
+    <div className="mt-6">
+      <p className="font-semibold mb-2">Where:</p>
+      <ul className="list-disc ml-6 space-y-2">
+        <li><strong>Variants</strong> — Number of groups including control</li>
+        <li><strong>CR</strong> — Baseline Conversion Rate (expressed as decimal)</li>
+        <li><strong>Uplift</strong> — Minimum detectable improvement (as decimal)</li>
+        <li><strong>Zα</strong> — Z-Score corresponding to the selected Confidence Level</li>
+        <li><strong>Zβ</strong> — Z-Score corresponding to the selected Statistical Power</li>
+        <li><strong>Daily Visitors</strong> — Average number of users exposed daily to the test</li>
+      </ul>
+    </div>
+
+    {/* Tip */}
+    <div className="mt-8 p-4 bg-blue-100 rounded-xl text-blue-900">
+      Higher confidence and lower minimum detectable uplift both require a longer test duration.
+    </div>
+
+  </div>
+</details>
 
         </div>
       </div>
