@@ -745,14 +745,28 @@ export default function ABTestAnalyzer() {
           <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">Duration Analysis</h3>
 
           {/* Main Result */}
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-1 rounded-xl shadow-lg mb-6">
-            <div className="bg-white/90 p-6 rounded-lg">
-              <p className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 text-center mb-2">
-                {durationResults.duration} days
-              </p>
-              <p className="text-center text-gray-600 font-medium">Recommended Test Duration</p>
-            </div>
-          </div>
+          <div className="relative bg-gradient-to-r from-blue-500 to-indigo-500 p-1 rounded-xl shadow-lg mb-6 overflow-hidden">
+
+  {/* Optional Light Pattern Background */}
+  <div className="absolute inset-0 bg-[url('/path/to/your-light-pattern.svg')] bg-cover opacity-10 rounded-xl"></div>
+
+  <div className="relative bg-white/90 p-6 rounded-lg flex flex-col items-center">
+
+    {/* Days */}
+    <p className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 text-center mb-2">
+      {durationResults.duration} days
+    </p>
+
+    {/* Weeks */}
+    <p className="text-lg font-bold text-indigo-700 mb-1">
+      (~{(durationResults.duration / 7).toFixed(1)} weeks)
+    </p>
+
+    {/* Caption */}
+    <p className="text-center text-gray-600 font-medium">Recommended Test Duration</p>
+  </div>
+
+</div>
 
           {/* Samples Info */}
           <div className="grid grid-cols-2 gap-4">
