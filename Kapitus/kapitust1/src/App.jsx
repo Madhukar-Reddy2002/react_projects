@@ -941,15 +941,42 @@ export default function ABTestAnalyzer() {
       </div>
 
       {/* Helpful Next Steps */}
-      <div className="mt-10 p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl backdrop-blur-md shadow-2xl">
-        <h3 className="text-xl font-bold text-blue-700 mb-4">Next Steps</h3>
-        <ul className="list-disc space-y-2 text-gray-700 pl-6">
-          <li>✅ If significant, consider deploying the winning variant.</li>
-          <li>🔍 If not significant, increase the sample size or extend test duration.</li>
-          <li>📊 Evaluate uplift and operational feasibility before rollout.</li>
-          <li>🎯 Use 95%+ confidence for critical business decisions.</li>
-        </ul>
+      {/* Helpful Insights */}
+<div className="mt-10 p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl backdrop-blur-md shadow-2xl">
+  <h3 className="text-xl font-bold text-blue-700 mb-6">🔍 Insights Summary</h3>
+
+  <div className="space-y-6 text-gray-800 text-sm">
+
+    {/* Example Insight for a Variant */}
+    {analysisResults.variants.map((variant, idx) => (
+      <div key={idx} className="p-4 bg-white/60 rounded-xl backdrop-blur-sm shadow-inner">
+        <h4 className="font-semibold text-blue-700 mb-3">Variant {variant.variant}</h4>
+
+        {/* Insight Message */}
+        <p className="mb-2">
+          {variant.isSignificant 
+            ? `🎯 Statistically significant with ${variant.confidence.toFixed(2)}% confidence.`
+            : `⚠️ Not enough evidence to declare a statistically significant improvement.`}
+        </p>
+
+        {/* Additional Guidance */}
+        {!variant.isSignificant && (
+          <>
+            <p className="mb-1">⏳ Need approximately {variant.requiredConversionsTable.find(r => r.level === 95)?.conversions - variant.conversions} more conversions to reach 95% confidence.</p>
+            <p className="mb-1">📈 Current confidence: {variant.confidence.toFixed(2)}%.</p>
+            <p className="mb-1">🔄 Consider extending test duration or increasing traffic.</p>
+          </>
+        )}
+
+        {/* Divider */}
+        <div className="border-t border-blue-200 mt-4 pt-4 text-xs text-gray-600">
+          (Based on Two-Tailed test at 95% target confidence.)
+        </div>
       </div>
+    ))}
+
+  </div>
+</div>
 
     </div>
   </div>
