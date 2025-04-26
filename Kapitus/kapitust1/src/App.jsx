@@ -270,7 +270,7 @@ export default function ABTestAnalyzer() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-6 bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-white p-4 md:p-6">
       <div className="backdrop-blur-md bg-white/70 rounded-2xl shadow-xl p-6 md:p-8 mb-6">
         {/* Header */}
         <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-6 text-center">A/B Test Analyzer & Calculator</h1>
