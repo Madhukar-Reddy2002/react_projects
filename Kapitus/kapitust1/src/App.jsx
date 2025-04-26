@@ -776,7 +776,7 @@ export default function ABTestAnalyzer() {
 
             {/* Variants */}
             {analysisResults.variants.map((v, idx) => (
-              <React.Fragment key={idx}>
+              <div key={idx}>
                 <tr className="hover:bg-blue-50 transition duration-300">
                   <td className="px-6 py-4 font-semibold">Variant {v.variant}</td>
                   <td className="px-6 py-4">{v.visitors}</td>
@@ -823,7 +823,7 @@ export default function ABTestAnalyzer() {
                     </details>
                   </td>
                 </tr>
-              </React.Fragment>
+              </div>
             ))}
 
           </tbody>
