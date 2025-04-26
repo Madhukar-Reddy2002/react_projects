@@ -741,110 +741,108 @@ export default function ABTestAnalyzer() {
       {showResultsSection && analysisResults && showAnalysisSection && (
   <div className="mb-8">
     <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-2xl shadow-2xl p-6 md:p-10 mb-8">
-      
-      {/* Header */}
+
+      {/* Section Header */}
       <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-8 text-center tracking-tight">
         Significance Analysis
       </h2>
 
-      {/* Main Table */}
+      {/* Table Wrapper */}
       <div className="overflow-x-auto rounded-xl backdrop-blur-md bg-white/30 border border-white/40 p-6 shadow-lg hover:shadow-2xl transition duration-300">
         <table className="w-full text-sm text-gray-700">
           <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
             <tr>
-              <th className="px-6 py-3 text-left">Variant</th>
-              <th className="px-6 py-3 text-left">Visitors</th>
-              <th className="px-6 py-3 text-left">Conversions</th>
-              <th className="px-6 py-3 text-left">Conversion Rate</th>
-              <th className="px-6 py-3 text-left">Uplift (%)</th>
-              <th className="px-6 py-3 text-left">Confidence (%)</th>
-              <th className="px-6 py-3 text-left">Significant?</th>
+              <th className="px-4 py-3 text-left">Variant</th>
+              <th className="px-4 py-3 text-left">Visitors</th>
+              <th className="px-4 py-3 text-left">Conversions</th>
+              <th className="px-4 py-3 text-left">Conversion Rate</th>
+              <th className="px-4 py-3 text-left">Uplift</th>
+              <th className="px-4 py-3 text-left">Confidence</th>
+              <th className="px-4 py-3 text-left">Significant?</th>
             </tr>
           </thead>
           <tbody>
 
             {/* Control Group */}
-            <tr className="bg-white/80">
-              <td className="px-6 py-4 font-semibold">Control (A)</td>
-              <td className="px-6 py-4">{analysisResults.control.visitors}</td>
-              <td className="px-6 py-4">{analysisResults.control.conversions}</td>
-              <td className="px-6 py-4">{analysisResults.control.conversionRate.toFixed(2)}%</td>
-              <td className="px-6 py-4">-</td>
-              <td className="px-6 py-4">-</td>
-              <td className="px-6 py-4">-</td>
+            <tr className="bg-white/80 border-b border-gray-200">
+              <td className="px-4 py-4 font-semibold">Control (A)</td>
+              <td className="px-4 py-4">{analysisResults.control.visitors}</td>
+              <td className="px-4 py-4">{analysisResults.control.conversions}</td>
+              <td className="px-4 py-4">{analysisResults.control.conversionRate.toFixed(2)}%</td>
+              <td className="px-4 py-4 text-center">-</td>
+              <td className="px-4 py-4 text-center">-</td>
+              <td className="px-4 py-4 text-center">-</td>
             </tr>
 
-            {/* Variants */}
+            {/* Variant Groups */}
             {analysisResults.variants.map((v, idx) => (
-              <div key={idx}>
-                <tr className="hover:bg-blue-50 transition duration-300">
-                  <td className="px-6 py-4 font-semibold">Variant {v.variant}</td>
-                  <td className="px-6 py-4">{v.visitors}</td>
-                  <td className="px-6 py-4">{v.conversions}</td>
-                  <td className="px-6 py-4">{v.conversionRate.toFixed(2)}%</td>
-                  <td className="px-6 py-4">{v.uplift.toFixed(2)}%</td>
-                  <td className="px-6 py-4">{v.confidence.toFixed(2)}%</td>
-                  <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-white text-xs ${
-                      v.isSignificant ? 'bg-green-500 animate-pulse' : 'bg-gray-400'
-                    }`}>
-                      {v.isSignificant ? 'Yes' : 'No'}
-                    </span>
-                  </td>
-                </tr>
-
-                {/* Expandable Required Conversions */}
-                <tr className="bg-white/90">
-                  <td colSpan="7" className="px-6 py-4">
-                    <details className="bg-blue-50/70 rounded-lg p-4 backdrop-blur-sm shadow-inner">
-                      <summary className="font-semibold text-blue-700 cursor-pointer">
-                        📋 View Required Conversions
-                      </summary>
-                      <div className="mt-4">
-                        <table className="text-sm w-full">
-                          <thead>
-                            <tr className="text-gray-600">
-                              <th className="text-left py-1 px-2">Confidence Level</th>
-                              <th className="text-left py-1 px-2">Required Conversions</th>
-                              <th className="text-left py-1 px-2">Current Conversions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {v.requiredConversionsTable.map((r, i) => (
-                              <tr key={i}>
-                                <td className="py-1 px-2">{r.level}%</td>
-                                <td className="py-1 px-2">{r.conversions}</td>
-                                <td className="py-1 px-2">{r.current}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </details>
-                  </td>
-                </tr>
-              </div>
+              <tr key={`variant-${idx}`} className="hover:bg-blue-50 transition duration-300">
+                <td className="px-4 py-4 font-semibold">Variant {v.variant}</td>
+                <td className="px-4 py-4">{v.visitors}</td>
+                <td className="px-4 py-4">{v.conversions}</td>
+                <td className="px-4 py-4">{v.conversionRate.toFixed(2)}%</td>
+                <td className="px-4 py-4">{v.uplift.toFixed(2)}%</td>
+                <td className="px-4 py-4">{v.confidence.toFixed(2)}%</td>
+                <td className="px-4 py-4">
+                  <span className={`px-3 py-1 rounded-full text-white text-xs ${
+                    v.isSignificant ? 'bg-green-500 animate-pulse' : 'bg-gray-400'
+                  }`}>
+                    {v.isSignificant ? 'Yes' : 'No'}
+                  </span>
+                </td>
+              </tr>
             ))}
 
           </tbody>
         </table>
+
+        {/* Expandable Required Conversions for each Variant */}
+        {analysisResults.variants.map((v, idx) => (
+          <div key={`required-${idx}`} className="mt-4 bg-blue-50/70 rounded-lg p-4 backdrop-blur-sm shadow-inner">
+            <details>
+              <summary className="font-semibold text-blue-700 cursor-pointer">
+                📋 View Required Conversions for Variant {v.variant}
+              </summary>
+              <div className="mt-4">
+                <table className="w-full text-sm">
+                  <thead className="text-gray-600">
+                    <tr>
+                      <th className="text-left py-2 px-2">Confidence Level</th>
+                      <th className="text-left py-2 px-2">Required Conversions</th>
+                      <th className="text-left py-2 px-2">Current Conversions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {v.requiredConversionsTable.map((r, i) => (
+                      <tr key={i}>
+                        <td className="py-1 px-2">{r.level}%</td>
+                        <td className="py-1 px-2">{r.conversions}</td>
+                        <td className="py-1 px-2">{r.current}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </div>
+        ))}
+
       </div>
 
-      {/* Next Steps */}
+      {/* Helpful Next Steps */}
       <div className="mt-10 p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl backdrop-blur-md shadow-2xl">
         <h3 className="text-xl font-bold text-blue-700 mb-4">Next Steps</h3>
         <ul className="list-disc space-y-2 text-gray-700 pl-6">
           <li>✅ If significant, consider deploying the winning variant.</li>
-          <li>🔍 If not significant, increase sample size or extend test duration.</li>
-          <li>📊 Always evaluate if uplift justifies operational changes.</li>
-          <li>🎯 Use higher confidence levels (95% or 99%) for major business decisions.</li>
+          <li>🔍 If not significant, increase the sample size or extend test duration.</li>
+          <li>📊 Evaluate uplift and operational feasibility before rollout.</li>
+          <li>🎯 Use 95%+ confidence for critical business decisions.</li>
         </ul>
       </div>
 
     </div>
   </div>
 )}
-
     </div>
   );
 }
