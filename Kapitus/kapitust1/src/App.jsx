@@ -475,144 +475,115 @@ export default function ABTestAnalyzer() {
       
       {/* Test Analysis Section */}
       {showAnalysisSection && (
-  <div className="mb-8">
-    <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-2xl shadow-2xl p-6 md:p-10 mb-8">
-      
-      {/* Section Header */}
-      <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-6 text-center tracking-tight">
-        Test Results Analyzer
-      </h2>
-      <p className="mb-10 text-gray-700 text-center max-w-2xl mx-auto leading-relaxed">
-        Enter your A/B test results to evaluate if the performance differences are statistically significant.
-      </p>
-
-      {/* Test Settings Section */}
-      <div className="backdrop-blur-sm bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 mb-10">
-        <h3 className="text-xl font-bold text-blue-700 mb-6">Test Settings</h3>
-
-        <div className="space-y-6">
-          
-          {/* Hypothesis Test Type */}
-          <div>
-            <label className="block text-gray-700 mb-2 font-semibold">Hypothesis Test Type</label>
-            <select
-              value={testType}
-              onChange={(e) => setTestType(e.target.value)}
-              className="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-            >
-              <option value="one_tailed">One-Tailed (Detect Improvements Only)</option>
-              <option value="two_tailed">Two-Tailed (Detect Any Difference)</option>
-            </select>
-            <p className="mt-1 text-xs text-gray-500">
-              {testType === 'one_tailed'
-                ? "Use one-tailed if you care only about improvement."
-                : "Use two-tailed if any change (positive or negative) matters."}
-            </p>
-          </div>
-
-          {/* Number of Variants */}
-          <div>
-            <label className="block text-gray-700 mb-2 font-semibold">Number of Variants (including Control)</label>
-            <input
-              type="number"
-              min="2"
-              max="5"
-              value={numVariants}
-              onChange={(e) => handleVariantCountChange(e.target.value)}
-              className="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-            />
-          </div>
-        </div>
-
-        {/* Expandable Statistical Parameters */}
-        <details className="mt-8 bg-blue-50/70 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
-          <summary className="font-semibold text-blue-700 cursor-pointer">
-            📈 View Statistical Parameters
-          </summary>
-          <div className="mt-4 text-sm text-blue-800 leading-relaxed">
-            <p><strong>One-Tailed Test:</strong> Detects improvement only.</p>
-            <p><strong>Two-Tailed Test:</strong> Detects any significant difference.</p>
-            <p className="mt-2"><strong>Confidence Level:</strong> Chance the result isn't random.</p>
-            <p className="mt-2"><strong>Statistical Power:</strong> Ability to detect true effects.</p>
-          </div>
-        </details>
-
-      </div>
-
-      {/* Test Data Section */}
-      <div className="backdrop-blur-sm bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 mb-10">
-        <h3 className="text-xl font-bold text-blue-700 mb-6">Test Data</h3>
-
-        {/* Control Group */}
-        <div className="mb-8 p-6 bg-white/30 rounded-xl shadow-inner backdrop-blur-sm">
-          <h4 className="text-lg font-bold text-blue-600 mb-4">Control Group (A)</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 mb-2 font-medium">Visitors</label>
-              <input
-                type="number"
-                min="1"
-                value={controlData.visitors}
-                onChange={(e) => setControlData({ ...controlData, visitors: parseInt(e.target.value) })}
-                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-2 font-medium">Conversions</label>
-              <input
-                type="number"
-                min="0"
-                value={controlData.conversions}
-                onChange={(e) => setControlData({ ...controlData, conversions: parseInt(e.target.value) })}
-                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Variant Groups */}
-        {Array.from({ length: numVariants - 1 }).map((_, i) => (
-          <div key={i} className="mb-8 p-6 bg-white/30 rounded-xl shadow-inner backdrop-blur-sm">
-            <h4 className="text-lg font-bold text-blue-600 mb-4">Variant {String.fromCharCode(66 + i)}</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-gray-700 mb-2 font-medium">Visitors</label>
-                <input
-                  type="number"
-                  min="1"
-                  value={variantData[i]?.visitors || 1000}
-                  onChange={(e) => updateVariantData(i, 'visitors', e.target.value)}
-                  className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-                />
+        <div className="mb-8">
+          <div className="backdrop-blur-md bg-white/70 rounded-2xl shadow-xl p-6 md:p-8 mb-6">
+            <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4 pb-2 border-b-2 border-blue-200">Test Results Analyzer</h2>
+            <p className="mb-4 text-gray-700">Enter your actual test results to analyze statistical significance.</p>
+            
+            <div className="backdrop-blur-sm bg-white/50 p-6 rounded-xl shadow-md mb-6 hover:shadow-lg transition duration-300">
+              <h3 className="text-xl font-semibold text-blue-600 mb-4">Test Settings</h3>
+              
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2 font-medium">Hypothesis Test Type</label>
+                <select
+                  value={testType}
+                  onChange={(e) => setTestType(e.target.value)}
+                  className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+                >
+                  <option value="one_tailed">One-Tailed (Detect Improvements Only)</option>
+                  <option value="two_tailed">Two-Tailed (Detect Any Difference)</option>
+                </select>
+                <p className="mt-1 text-sm text-gray-500">
+                  {testType === 'one_tailed' 
+                    ? "One-tailed tests if variant is better than control. Good for optimization testing." 
+                    : "Two-tailed tests if there's any difference. More scientifically rigorous."}
+                </p>
               </div>
-              <div>
-                <label className="block text-gray-700 mb-2 font-medium">Conversions</label>
+              
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2 font-medium">Number of Variants (including Control)</label>
                 <input
                   type="number"
-                  min="0"
-                  value={variantData[i]?.conversions || 150}
-                  onChange={(e) => updateVariantData(i, 'conversions', e.target.value)}
-                  className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+                  min="2"
+                  max="5"
+                  value={numVariants}
+                  onChange={(e) => handleVariantCountChange(e.target.value)}
+                  className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
                 />
               </div>
             </div>
+            
+            <div className="backdrop-blur-sm bg-white/50 p-6 rounded-xl shadow-md mb-6 hover:shadow-lg transition duration-300">
+              <h3 className="text-xl font-semibold text-blue-600 mb-4">Test Data</h3>
+              
+              {/* Control Group */}
+              <div className="mb-6 p-4 bg-white/50 rounded-lg shadow-inner backdrop-blur-sm">
+                <h4 className="font-semibold text-lg text-blue-700 mb-3">Control (A)</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-gray-700 mb-1">Visitors</label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={controlData.visitors}
+                      onChange={(e) => setControlData({...controlData, visitors: parseInt(e.target.value)})}
+                      className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-1">Conversions</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={controlData.conversions}
+                      onChange={(e) => setControlData({...controlData, conversions: parseInt(e.target.value)})}
+                      className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Variant Groups */}
+              {Array.from({ length: numVariants - 1 }).map((_, i) => (
+                <div key={i} className="mb-6 p-4 bg-white/50 rounded-lg shadow-inner backdrop-blur-sm">
+                  <h4 className="font-semibold text-lg text-blue-700 mb-3">Variant {String.fromCharCode(66 + i)}</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-1">Visitors</label>
+                      <input
+                        type="number"
+                        min="1"
+                        value={variantData[i]?.visitors || 1000}
+                        onChange={(e) => updateVariantData(i, 'visitors', e.target.value)}
+                        className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 mb-1">Conversions</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={variantData[i]?.conversions || 150}
+                        onChange={(e) => updateVariantData(i, 'conversions', e.target.value)}
+                        className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={handleAnalyzeResults}
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200"
+              >
+                Analyze Results
+              </button>
+            </div>
           </div>
-        ))}
-      </div>
-
-      {/* Analyze Button */}
-      <div className="mt-12 flex justify-center">
-        <button
-          onClick={handleAnalyzeResults}
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-in-out"
-        >
-          📊 Analyze Results
-        </button>
-      </div>
-
-    </div>
-  </div>
-)}
+        </div>
+      )}
       
       {/* Results Section for Duration Calculator */}
       {showResultsSection && durationResults && showDurationSection && (
