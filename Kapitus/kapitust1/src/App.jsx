@@ -525,17 +525,50 @@ export default function ABTestAnalyzer() {
         </div>
 
         {/* Expandable Statistical Info */}
-        <details className="mt-8 bg-blue-50/80 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
-          <summary className="font-semibold text-blue-700 cursor-pointer">
-            📈 View Statistical Parameters
-          </summary>
-          <div className="mt-4 text-sm text-blue-800 leading-relaxed">
-            <p><strong>One-Tailed Test:</strong> Checks if variant is better.</p>
-            <p><strong>Two-Tailed Test:</strong> Detects any difference.</p>
-            <p className="mt-2"><strong>Confidence Level:</strong> Probability the detected effect is real.</p>
-            <p className="mt-2"><strong>Statistical Power:</strong> Probability of correctly detecting a true effect.</p>
-          </div>
-        </details>
+        {/* Expandable Statistical Info */}
+<details className="mt-8 bg-blue-50/80 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
+  <summary className="font-semibold text-blue-700 cursor-pointer">
+    📊 View Statistical Formula & Terms
+  </summary>
+  <div className="mt-4 text-sm text-blue-800 leading-relaxed space-y-4">
+    
+    {/* Formula */}
+    <div>
+      <p className="font-semibold mb-2">Test Statistic (Z-Score):</p>
+      <p className="bg-blue-100 p-3 rounded-lg shadow-inner text-blue-900">
+        Z = (pB - pA) ÷ √(pPool × (1 - pPool) × (1/nA + 1/nB))
+      </p>
+    </div>
+
+    {/* Definitions */}
+    <div>
+      <p className="font-semibold mt-4 mb-2">Where:</p>
+      <ul className="list-disc ml-6 space-y-2">
+        <li><strong>pA</strong> — Conversion rate of Control group (A)</li>
+        <li><strong>pB</strong> — Conversion rate of Variant group (B)</li>
+        <li><strong>pPool</strong> — Combined conversion rate across A and B</li>
+        <li><strong>nA</strong> — Number of visitors in Control group</li>
+        <li><strong>nB</strong> — Number of visitors in Variant group</li>
+      </ul>
+    </div>
+
+    {/* Key Metrics */}
+    <div className="mt-6">
+      <p className="font-semibold mb-2">Key Metrics:</p>
+      <ul className="list-disc ml-6 space-y-2">
+        <li><strong>p-value</strong>: Probability that the observed difference is due to random chance.</li>
+        <li><strong>Confidence %</strong>: (1 - p-value) × 100; how confident we are in the observed effect.</li>
+        <li><strong>Uplift %</strong>: Percentage improvement of the variant over the control.</li>
+      </ul>
+    </div>
+
+    {/* Tip */}
+    <div className="mt-8 p-4 bg-blue-100 rounded-xl text-blue-900">
+      A p-value below 0.05 typically indicates a statistically significant result at the 95% confidence level.
+    </div>
+
+  </div>
+</details>
 
       </div>
 
