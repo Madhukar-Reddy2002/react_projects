@@ -322,87 +322,112 @@ export default function ABTestAnalyzer() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {/* Left Card - Test Parameters */}
-        <div className="backdrop-blur-sm bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300">
-          <h3 className="text-xl font-bold text-blue-700 mb-6">Test Parameters</h3>
+<div className="backdrop-blur-sm bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
+  <h3 className="text-xl font-bold text-blue-700 mb-6 text-center">Test Parameters</h3>
 
-          <div className="space-y-6">
+  <div className="space-y-6">
 
-            {/* Daily Visitors */}
-            <div>
-              <label className="block text-gray-700 mb-2 font-medium">Daily Visitors (all variants)</label>
-              <input
-                type="number"
-                min="1"
-                value={dailyVisitors}
-                onChange={(e) => setDailyVisitors(parseInt(e.target.value))}
-                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-              />
-            </div>
+    {/* Daily Visitors */}
+    <div>
+      <label className="block text-gray-700 mb-2 font-medium">Daily Visitors (all variants)</label>
+      <input
+        type="number"
+        min="1"
+        value={dailyVisitors}
+        onChange={(e) => setDailyVisitors(parseInt(e.target.value))}
+        className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+      />
+    </div>
 
-            {/* Baseline Conversion Rate */}
-            <div>
-              <label className="block text-gray-700 mb-2 font-medium">Baseline Conversion Rate (%)</label>
-              <input
-                type="number"
-                min="0.1"
-                max="100"
-                step="0.1"
-                value={conversionRate}
-                onChange={(e) => setConversionRate(parseFloat(e.target.value))}
-                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-              />
-            </div>
+    {/* Baseline Conversion Rate */}
+    <div>
+      <label className="block text-gray-700 mb-2 font-medium">Baseline Conversion Rate (%)</label>
+      <input
+        type="number"
+        min="0.1"
+        max="100"
+        step="0.1"
+        value={conversionRate}
+        onChange={(e) => setConversionRate(parseFloat(e.target.value))}
+        className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+      />
+    </div>
 
-            {/* Minimum Detectable Uplift */}
-            <div>
-              <label className="block text-gray-700 mb-2 font-medium">Minimum Detectable Effect (Expected Uplift %)</label>
-              <input
-                type="number"
-                min="0.1"
-                max="100"
-                step="0.1"
-                value={expectedUplift}
-                onChange={(e) => setExpectedUplift(parseFloat(e.target.value))}
-                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-              />
-            </div>
+    {/* Minimum Detectable Uplift */}
+    <div>
+      <label className="block text-gray-700 mb-2 font-medium">Minimum Detectable Effect (Expected Uplift %)</label>
+      <input
+        type="number"
+        min="0.1"
+        max="100"
+        step="0.1"
+        value={expectedUplift}
+        onChange={(e) => setExpectedUplift(parseFloat(e.target.value))}
+        className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+      />
+    </div>
 
-            {/* Number of Variants */}
-            {/* Number of Variants */}
-<div>
-  <label className="block text-gray-700 mb-2 font-medium">Number of Variants (including Control)</label>
-  
-  <div className="flex items-center space-x-3">
-    {/* Minus Button */}
-    <button
-      type="button"
-      onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
-      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
-    >
-      −
-    </button>
+    {/* Number of Variants (Centered with Buttons) */}
+    <div className="flex flex-col items-center space-y-3">
+      <label className="block text-gray-700 mb-2 font-medium text-center">
+        Number of Variants (including Control)
+      </label>
 
-    {/* Number Display */}
-    <input
-      type="number"
-      min="2"
-      max="5"
-      value={numVariants}
-      onChange={(e) => handleVariantCountChange(e.target.value)}
-      className="w-20 text-center p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-    />
+      <div className="flex items-center space-x-4">
+        {/* Minus Button */}
+        <button
+          type="button"
+          onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
+          className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition transform hover:scale-110"
+        >
+          −
+        </button>
 
-    {/* Plus Button */}
-    <button
-      type="button"
-      onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
-      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
-    >
-      +
-    </button>
+        {/* Number Display */}
+        <input
+          type="number"
+          min="2"
+          max="5"
+          value={numVariants}
+          onChange={(e) => handleVariantCountChange(e.target.value)}
+          className="w-20 text-center p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+        />
+
+        {/* Plus Button */}
+        <button
+          type="button"
+          onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
+          className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition transform hover:scale-110"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    {/* ✨ Smart Warnings Section (Animated) */}
+    <div className="mt-8 space-y-4">
+      {dailyVisitors < 100 && (
+        <div className="animate-fade-in-down text-sm text-yellow-700 bg-yellow-100 p-3 rounded-lg shadow-inner">
+          ⚠️ Very low daily visitors. Test may take too long to complete.
+        </div>
+      )}
+
+      {expectedUplift < 5 && (
+        <div className="animate-fade-in-down text-sm text-yellow-700 bg-yellow-100 p-3 rounded-lg shadow-inner">
+          ⚠️ Very small expected uplift. Detection might require extended test duration.
+        </div>
+      )}
+
+      {conversionRate < 1 && (
+        <div className="animate-fade-in-down text-sm text-yellow-700 bg-yellow-100 p-3 rounded-lg shadow-inner">
+          ⚠️ Very low baseline conversion rate. Consider improving funnel before testing.
+        </div>
+      )}
+    </div>
+
   </div>
-
 </div>
+
 
           </div>
         </div>
