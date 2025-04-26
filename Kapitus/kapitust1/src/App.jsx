@@ -25,7 +25,6 @@ export default function ABTestAnalyzer() {
   const [showDurationSection, setShowDurationSection] = useState(true);
   const [showAnalysisSection, setShowAnalysisSection] = useState(false);
   const [showResultsSection, setShowResultsSection] = useState(false);
-  const [confidenceVsDurationData, setConfidenceVsDurationData] = useState([]);
   
   // Z-score mapping for confidence levels - separated by test type
   const zScores = {
@@ -158,28 +157,10 @@ export default function ABTestAnalyzer() {
   
   // Handle the form submission for test duration
   const handleCalculateDuration = () => {
-  const results = calculateTestDuration();
-  setDurationResults(results);
-  setShowResultsSection(true);
-
-  // Now generate Confidence Level vs Duration Graph Data
-  const confidenceLevels = [80, 85, 90, 95, 99];
-  const simulatedData = confidenceLevels.map(level => {
-    const zAlpha = zScores[testType][level];
-    const zBeta = powerScores[power];
-    const confidenceConstant = 2 * Math.pow((zAlpha + zBeta), 2);
-    const cr = conversionRate / 100;
-    const uplift = expectedUplift / 100;
-    const numerator = numVariants * confidenceConstant * Math.pow(Math.sqrt(cr * (1 - cr)) / (cr * uplift), 2);
-    const duration = numerator / dailyVisitors;
-    return {
-      confidenceLevel: `${level}%`,
-      duration: Math.ceil(duration)
-    };
-  });
-
-  setConfidenceVsDurationData(simulatedData);
-};
+    const results = calculateTestDuration();
+    setDurationResults(results);
+    setShowResultsSection(true);
+  };
   
   // Handle the form submission for test analysis
   const handleAnalyzeResults = () => {
@@ -626,19 +607,6 @@ export default function ABTestAnalyzer() {
             </div>
           </div>
         </div>
-        <div className="mt-12">
-  <h3 className="text-xl font-semibold text-blue-600 mb-4">Confidence Level vs Test Duration</h3>
-  <ResponsiveContainer width="100%" height={300}>
-    <LineChart data={confidenceVsDurationData}>
-      <CartesianGrid strokeDasharray="3 3" stroke="#c7d2fe" />
-      <XAxis dataKey="confidenceLevel" stroke="#6366f1" />
-      <YAxis stroke="#6366f1" />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="duration" stroke="#60a5fa" strokeWidth={3} activeDot={{ r: 6 }} />
-    </LineChart>
-  </ResponsiveContainer>
-</div>
       )}
 
       {/* Test Results Analysis Section */}
