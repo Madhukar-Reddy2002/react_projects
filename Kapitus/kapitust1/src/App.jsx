@@ -462,11 +462,11 @@ export default function ABTestAnalyzer() {
       {/* Calculate Button */}
       <div className="mt-8 flex justify-center">
         <button
-          onClick={handleCalculateDuration}
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transition duration-300"
-        >
-          🚀 Calculate Test Duration
-        </button>
+  onClick={handleCalculateDuration}
+  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-in-out"
+>
+  🚀 Calculate Test Duration
+</button>
       </div>
 
     </div>
