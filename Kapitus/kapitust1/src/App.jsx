@@ -78,7 +78,7 @@ export default function ABTestAnalyzer() {
     
     // Create chart data for different uplift levels
     const chartData = [];
-    const upliftLevels = [1, 3, 5, 7, 8, 10, 12.5, 15, 20, 25];
+    const upliftLevels = [5, 8, 10, 12.5, 15, 20, 25];
     
     for (let upliftLevel of upliftLevels) {
       const upliftDecimal = upliftLevel / 100;
@@ -463,7 +463,7 @@ export default function ABTestAnalyzer() {
       <div className="mt-8 flex justify-center">
         <button
   onClick={handleCalculateDuration}
-  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-in-out"
+  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 ease-in-out"
 >
   🚀 Calculate Test Duration
 </button>
@@ -605,7 +605,7 @@ export default function ABTestAnalyzer() {
       <div className="mt-12 flex justify-center">
         <button
           onClick={handleAnalyzeResults}
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300"
         >
           📊 Analyze Results
         </button>
