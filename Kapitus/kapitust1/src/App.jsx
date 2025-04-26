@@ -271,32 +271,42 @@ export default function ABTestAnalyzer() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-white p-4 md:p-6">
-      <div className="backdrop-blur-md bg-white/70 rounded-2xl shadow-xl p-6 md:p-8 mb-6">
-        {/* Header */}
-        <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-6 text-center">A/B Test Analyzer & Calculator</h1>
-        
-        {/* Navigation Tabs */}
-        <div className="flex flex-wrap md:flex-nowrap mb-6 justify-center">
-          <button 
-            className={`py-2 px-4 rounded-lg font-semibold transition duration-200 mx-1 ${showDurationSection ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/80 text-gray-600 hover:bg-blue-100 shadow-md'}`}
-            onClick={() => {
-              setShowDurationSection(true);
-              setShowAnalysisSection(false);
-            }}
-          >
-            Test Duration Calculator
-          </button>
-          <button 
-            className={`py-2 px-4 rounded-lg font-semibold transition duration-200 mx-1 ${showAnalysisSection ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/80 text-gray-600 hover:bg-blue-100 shadow-md'}`}
-            onClick={() => {
-              setShowDurationSection(false);
-              setShowAnalysisSection(true);
-            }}
-          >
-            Test Results Analyzer
-          </button>
-        </div>
-      </div>
+      <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
+  {/* Header */}
+  <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-500 to-cyan-400 mb-8 text-center tracking-tight drop-shadow-lg">
+    A/B Test Analyzer & Calculator
+  </h1>
+
+  {/* Navigation Tabs */}
+  <div className="flex flex-col md:flex-row justify-center gap-4">
+    <button 
+      className={`w-full md:w-auto py-3 px-6 rounded-full font-semibold transition duration-300 ease-in-out ${
+        showDurationSection 
+          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl' 
+          : 'bg-white/50 text-gray-700 border border-blue-300 hover:bg-blue-100 shadow-md'
+      }`}
+      onClick={() => {
+        setShowDurationSection(true);
+        setShowAnalysisSection(false);
+      }}
+    >
+      Test Duration Calculator
+    </button>
+    <button 
+      className={`w-full md:w-auto py-3 px-6 rounded-full font-semibold transition duration-300 ease-in-out ${
+        showAnalysisSection 
+          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl' 
+          : 'bg-white/50 text-gray-700 border border-blue-300 hover:bg-blue-100 shadow-md'
+      }`}
+      onClick={() => {
+        setShowDurationSection(false);
+        setShowAnalysisSection(true);
+      }}
+    >
+      Test Results Analyzer
+    </button>
+  </div>
+</div>
       
       {/* Test Duration Calculator Section */}
       {showDurationSection && (
