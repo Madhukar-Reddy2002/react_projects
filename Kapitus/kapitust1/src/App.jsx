@@ -310,137 +310,168 @@ export default function ABTestAnalyzer() {
       
       {/* Test Duration Calculator Section */}
       {showDurationSection && (
-        <div className="mb-8">
-          <div className="backdrop-blur-md bg-white/70 rounded-2xl shadow-xl p-6 md:p-8 mb-6">
-            <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4 pb-2 border-b-2 border-blue-200">Test Duration Calculator</h2>
-            <p className="mb-4 text-gray-700">Calculate how long your A/B test should run based on your parameters.</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="backdrop-blur-sm bg-white/50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                <h3 className="text-xl font-semibold text-blue-600 mb-4">Test Parameters</h3>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Number of Variants (including Control)</label>
-                  <input
-                    type="number"
-                    min="2"
-                    max="5"
-                    value={numVariants}
-                    onChange={(e) => handleVariantCountChange(e.target.value)}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Baseline Conversion Rate (%)</label>
-                  <input
-                    type="number"
-                    min="0.1"
-                    max="100"
-                    step="0.1"
-                    value={conversionRate}
-                    onChange={(e) => setConversionRate(parseFloat(e.target.value))}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Expected Uplift (%)</label>
-                  <input
-                    type="number"
-                    min="0.1"
-                    max="100"
-                    step="0.1"
-                    value={expectedUplift}
-                    onChange={(e) => setExpectedUplift(parseFloat(e.target.value))}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Daily Visitors (all variants combined)</label>
-                  <input
-                    type="number"
-                    min="1"
-                    value={dailyVisitors}
-                    onChange={(e) => setDailyVisitors(parseInt(e.target.value))}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  />
-                </div>
-              </div>
-              
-              <div className="backdrop-blur-sm bg-white/50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                <h3 className="text-xl font-semibold text-blue-600 mb-4">Statistical Parameters</h3>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Test Type</label>
-                  <select
-                    value={testType}
-                    onChange={(e) => setTestType(e.target.value)}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  >
-                    <option value="one_tailed">One-Tailed (Detect Improvements Only)</option>
-                    <option value="two_tailed">Two-Tailed (Detect Any Difference)</option>
-                  </select>
-                  <p className="mt-1 text-sm text-gray-500">
-                    {testType === 'one_tailed' 
-                      ? "One-tailed has more power to detect positive improvements." 
-                      : "Two-tailed can detect both positive and negative changes."}
-                  </p>
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Confidence Level</label>
-                  <select
-                    value={confidenceLevel}
-                    onChange={(e) => setConfidenceLevel(parseInt(e.target.value))}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  >
-                    <option value="80">80%</option>
-                    <option value="85">85%</option>
-                    <option value="90">90%</option>
-                    <option value="95">95%</option>
-                    <option value="99">99%</option>
-                  </select>
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2 font-medium">Statistical Power</label>
-                  <select
-                    value={power}
-                    onChange={(e) => setPower(parseInt(e.target.value))}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-                  >
-                    <option value="80">80%</option>
-                    <option value="85">85%</option>
-                    <option value="90">90%</option>
-                    <option value="95">95%</option>
-                    <option value="99">99%</option>
-                  </select>
-                </div>
-                
-                <div className="bg-blue-50/70 p-4 rounded-lg mt-6 backdrop-blur-sm shadow-inner">
-                  <p className="text-sm text-blue-700">
-                    <strong>Formula Used:</strong> Test Duration (Days) = (Variants * ConfidenceConstant * POWER(SQRT(CR*(1-CR))/(CR*Uplift),2))/DailyVisitors
-                  </p>
-                  <p className="text-sm text-blue-700 mt-2">
-                    <strong>Where:</strong> ConfidenceConstant = 2*(Z_alpha + Z_beta)^2
-                  </p>
-                </div>
-              </div>
+  <div className="mb-8">
+    <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
+      <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-6 text-center tracking-tight">
+        Test Duration Calculator
+      </h2>
+      <p className="mb-8 text-gray-700 text-center max-w-2xl mx-auto">
+        Quickly estimate how many days your A/B test should run based on traffic, baseline performance, and your expected uplift.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        {/* Left Card - Test Parameters */}
+        <div className="backdrop-blur-sm bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300">
+          <h3 className="text-xl font-bold text-blue-700 mb-6">Test Parameters</h3>
+
+          <div className="space-y-6">
+
+            {/* Daily Visitors */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Daily Visitors (all variants)</label>
+              <input
+                type="number"
+                min="1"
+                value={dailyVisitors}
+                onChange={(e) => setDailyVisitors(parseInt(e.target.value))}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              />
             </div>
-            
-            <div className="mt-6 flex justify-center">
-              <button
-                onClick={handleCalculateDuration}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200"
-              >
-                Calculate Test Duration
-              </button>
+
+            {/* Baseline Conversion Rate */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Baseline Conversion Rate (%)</label>
+              <input
+                type="number"
+                min="0.1"
+                max="100"
+                step="0.1"
+                value={conversionRate}
+                onChange={(e) => setConversionRate(parseFloat(e.target.value))}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              />
             </div>
+
+            {/* Minimum Detectable Uplift */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Minimum Detectable Effect (Expected Uplift %)</label>
+              <input
+                type="number"
+                min="0.1"
+                max="100"
+                step="0.1"
+                value={expectedUplift}
+                onChange={(e) => setExpectedUplift(parseFloat(e.target.value))}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              />
+            </div>
+
+            {/* Number of Variants */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Number of Variants (including Control)</label>
+              <input
+                type="number"
+                min="2"
+                max="5"
+                value={numVariants}
+                onChange={(e) => handleVariantCountChange(e.target.value)}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              />
+            </div>
+
           </div>
         </div>
-      )}
+
+        {/* Right Card - Statistical Parameters */}
+        <div className="backdrop-blur-sm bg-white/30 border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300">
+          <h3 className="text-xl font-bold text-blue-700 mb-6">Statistical Settings</h3>
+
+          <div className="space-y-6">
+
+            {/* Test Type */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Test Type</label>
+              <select
+                value={testType}
+                onChange={(e) => setTestType(e.target.value)}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              >
+                <option value="one_tailed">One-Tailed (Detect Improvements Only)</option>
+                <option value="two_tailed">Two-Tailed (Detect Any Difference)</option>
+              </select>
+              <p className="mt-1 text-xs text-gray-500">
+                {testType === 'one_tailed' 
+                  ? "Best for optimization experiments aiming for improvements." 
+                  : "Use two-tailed if any difference (good or bad) matters."}
+              </p>
+            </div>
+
+            {/* Confidence Level */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Confidence Level (%)</label>
+              <select
+                value={confidenceLevel}
+                onChange={(e) => setConfidenceLevel(parseInt(e.target.value))}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              >
+                <option value="80">80%</option>
+                <option value="85">85%</option>
+                <option value="90">90%</option>
+                <option value="95">95%</option>
+                <option value="99">99%</option>
+              </select>
+            </div>
+
+            {/* Statistical Power */}
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">Statistical Power (%)</label>
+              <select
+                value={power}
+                onChange={(e) => setPower(parseInt(e.target.value))}
+                className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
+              >
+                <option value="80">80%</option>
+                <option value="85">85%</option>
+                <option value="90">90%</option>
+                <option value="95">95%</option>
+                <option value="99">99%</option>
+              </select>
+            </div>
+
+          </div>
+
+          {/* Expandable Formula Section */}
+          <details className="mt-8 bg-blue-50/70 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
+            <summary className="font-semibold text-blue-700 cursor-pointer">
+              View Calculation Formula
+            </summary>
+            <div className="mt-4 text-sm text-blue-800 leading-relaxed">
+              <p><strong>Test Duration (Days)</strong> = (Variants × Confidence Constant × (√(CR × (1-CR)) ÷ (CR × Uplift))²) ÷ Daily Visitors</p>
+              <p className="mt-2"><strong>Confidence Constant</strong> = 2 × (Zα + Zβ)²</p>
+              <p className="mt-2 text-gray-600">
+                Where CR = Baseline Conversion Rate, Uplift = Minimum Detectable Effect,  
+                Zα = Z-Score for Confidence Level, Zβ = Z-Score for Statistical Power.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      {/* Calculate Button */}
+      <div className="mt-8 flex justify-center">
+        <button
+          onClick={handleCalculateDuration}
+          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transition duration-300"
+        >
+          🚀 Calculate Test Duration
+        </button>
+      </div>
+
+    </div>
+  </div>
+)}
       
       {/* Test Analysis Section */}
       {showAnalysisSection && (
