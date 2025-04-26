@@ -9,7 +9,7 @@ export default function ABTestAnalyzer() {
   const [dailyVisitors, setDailyVisitors] = useState(350);
   const [confidenceLevel, setConfidenceLevel] = useState(80);
   const [power, setPower] = useState(80);
-  const [testType, setTestType] = useState('one_tailed');
+  const [testType, setTestType] = useState('two_tailed');
   const [confidenceVsDurationData, setConfidenceVsDurationData] = useState([]);
 
   
@@ -78,7 +78,7 @@ export default function ABTestAnalyzer() {
     
     // Create chart data for different uplift levels
     const chartData = [];
-    const upliftLevels = [5, 10, 15, 20, 25];
+    const upliftLevels = [1, 3, 5, 7, 8, 10, 12.5, 15, 20, 25];
     
     for (let upliftLevel of upliftLevels) {
       const upliftDecimal = upliftLevel / 100;
@@ -164,7 +164,7 @@ export default function ABTestAnalyzer() {
   setShowResultsSection(true);
 
   // Now generate Confidence Level vs Duration Graph Data
-  const confidenceLevels = [80, 85, 90, 95, 99];
+  const confidenceLevels = [70, 75, 80, 85, 90, 95, 99];
   const simulatedData = confidenceLevels.map(level => {
     const zAlpha = zScores[testType][level];
     const zBeta = powerScores[power];
