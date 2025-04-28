@@ -681,36 +681,42 @@ export default function ABTestAnalyzer() {
 
         {/* Variant Groups */}
         {Array.from({ length: numVariants - 1 }).map((_, i) => (
-          <div key={i} className="mb-8 p-6 bg-white/40 rounded-xl shadow-inner backdrop-blur-sm">
-            <h4 className="text-lg font-bold text-blue-600 mb-4">Variant {String.fromCharCode(66 + i)}</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-gray-700 mb-2 font-medium">Visitors</label>
-                <input
-  type="number"
-  min="0"
-  value={variantData[i]?.visitors === '' ? '' : variantData[i]?.visitors || 1000}
-  onChange={(e) => updateVariantData(i, 'visitors', e.target.value)}
-  placeholder="Enter Visitors"
-  className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-/>
+  <div key={i} className="mb-8 p-6 bg-white/40 rounded-xl shadow-inner backdrop-blur-sm">
+    <h4 className="text-lg font-bold text-blue-600 mb-4">
+      Variant {String.fromCharCode(66 + i)}
+    </h4>
 
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2 font-medium">Conversions</label>
-                <input
-  type="number"
-  min="0"
-  value={variantData[i]?.conversions === '' ? '' : variantData[i]?.conversions || 150}
-  onChange={(e) => updateVariantData(i, 'conversions', e.target.value)}
-  placeholder="Enter Conversions"
-  className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-/>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      {/* Visitors Input */}
+      <div>
+        <label className="block text-gray-700 mb-2 font-medium">Visitors</label>
+        <input
+          type="number"
+          min="0"
+          value={variantData[i]?.visitors === undefined ? '' : variantData[i]?.visitors}
+          onChange={(e) => updateVariantData(i, 'visitors', e.target.value)}
+          placeholder="Enter Visitors"
+          className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+        />
+      </div>
 
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Conversions Input */}
+      <div>
+        <label className="block text-gray-700 mb-2 font-medium">Conversions</label>
+        <input
+          type="number"
+          min="0"
+          value={variantData[i]?.conversions === undefined ? '' : variantData[i]?.conversions}
+          onChange={(e) => updateVariantData(i, 'conversions', e.target.value)}
+          placeholder="Enter Conversions"
+          className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+        />
+      </div>
+
+    </div>
+  </div>
+))}
 
       </div>
 
