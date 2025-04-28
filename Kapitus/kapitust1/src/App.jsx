@@ -104,47 +104,45 @@ export default function ABTestAnalyzer() {
   
   // Calculate statistical significance
   const calculateSignificance = (convA, nA, convB, nB, testType = 'one_tailed') => {
-    const pA = convA / nA;
-    const pB = convB / nB;
-    const pPool = (convA + convB) / (nA + nB);
-    
-    const se = Math.sqrt(pPool * (1 - pPool) * (1/nA + 1/nB));
-    const z = (pB - pA) / se;
-    
-    // Calculate p-value based on test type
-    let pValue;
-    if (testType === 'one_tailed') {
-      // One-tailed test (testing if variant is better)
-      pValue = 1 - normalCDF(z);
-    } else {
-      // Two-tailed test (testing if there's any difference)
-      pValue = 2 * (1 - normalCDF(Math.abs(z)));
-    }
-    
-    const confidence = (1 - pValue) * 100;
-    const uplift = ((pB - pA) / pA) * 100;
-    
-    return {
-      confidence: Math.round(confidence * 100) / 100,
-      pA: Math.round(pA * 10000) / 100,
-      pB: Math.round(pB * 10000) / 100,
-      uplift: Math.round(uplift * 100) / 100,
-      pValue: Math.round(pValue * 10000) / 10000,
-      isSignificant: confidence >= 95
-    };
+  const pA = convA / nA;
+  const pB = convB / nB;
+  const pPool = (convA + convB) / (nA + nB);
+
+  const se = Math.sqrt(pPool * (1 - pPool) * (1 / nA + 1 / nB));
+  const z = (pB - pA) / se;
+
+  // Updated p-value calculation
+  let pValue;
+  if (testType === 'one_tailed') {
+    pValue = 1 - normalCDF(Math.abs(z));
+  } else {
+    pValue = 2 * (1 - normalCDF(Math.abs(z)));
+  }
+
+  const confidence = (1 - pValue) * 100;
+  const uplift = ((pB - pA) / pA) * 100;
+
+  return {
+    confidence: Math.round(confidence * 100) / 100,
+    pA: Math.round(pA * 10000) / 100,
+    pB: Math.round(pB * 10000) / 100,
+    uplift: Math.round(uplift * 100) / 100,
+    pValue: Math.round(pValue * 10000) / 10000,
+    isSignificant: confidence >= 95
   };
+};
   
   // Calculate required conversions to reach significance
   const calculateRequiredConversions = (nA, convA, nB, confidenceLevel, testType) => {
-    const pA = convA / nA; // Control conversion rate
-    const z = zScores[testType][confidenceLevel];
-    
-    const se = Math.sqrt(pA * (1 - pA) * (2 / nB));
-    const minPB = pA + z * se;
-    const requiredConvB = minPB * nB;
-    
-    return Math.ceil(requiredConvB);
-  };
+  const pA = convA / nA;
+  const z = zScores[testType][confidenceLevel];
+
+  const se = Math.sqrt(pA * (1 - pA) * (2 / nB));
+  const minPB = pA + z * se;
+  const requiredConvB = minPB * nB;
+
+  return Math.ceil(requiredConvB);
+};
   
   // Standard normal cumulative distribution function
   const normalCDF = (x) => {
