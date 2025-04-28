@@ -9,7 +9,7 @@ export default function ABTestAnalyzer() {
   const [dailyVisitors, setDailyVisitors] = useState(350);
   const [confidenceLevel, setConfidenceLevel] = useState(80);
   const [power, setPower] = useState(80);
-  const [testType, setTestType] = useState('two_tailed');
+  const [testType, setTestType] = useState('one_tailed');
   const [confidenceVsDurationData, setConfidenceVsDurationData] = useState([]);
 
   
