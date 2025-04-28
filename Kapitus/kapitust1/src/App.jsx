@@ -687,22 +687,26 @@ export default function ABTestAnalyzer() {
               <div>
                 <label className="block text-gray-700 mb-2 font-medium">Visitors</label>
                 <input
-                  type="number"
-                  min="1"
-                  value={variantData[i]?.visitors || 1000}
-                  onChange={(e) => updateVariantData(i, 'visitors', e.target.value)}
-                  className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-                />
+  type="number"
+  min="0"
+  value={variantData[i]?.visitors === '' ? '' : variantData[i]?.visitors || 1000}
+  onChange={(e) => updateVariantData(i, 'visitors', e.target.value)}
+  placeholder="Enter Visitors"
+  className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+/>
+
               </div>
               <div>
                 <label className="block text-gray-700 mb-2 font-medium">Conversions</label>
                 <input
-                  type="number"
-                  min="0"
-                  value={variantData[i]?.conversions || 150}
-                  onChange={(e) => updateVariantData(i, 'conversions', e.target.value)}
-                  className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
-                />
+  type="number"
+  min="0"
+  value={variantData[i]?.conversions === '' ? '' : variantData[i]?.conversions || 150}
+  onChange={(e) => updateVariantData(i, 'conversions', e.target.value)}
+  placeholder="Enter Conversions"
+  className="w-full p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+/>
+
               </div>
             </div>
           </div>
