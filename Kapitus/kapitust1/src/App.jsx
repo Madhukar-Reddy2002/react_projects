@@ -301,7 +301,7 @@ export default function ABTestAnalyzer() {
         setShowAnalysisSection(true);
       }}
     >
-      Test Results Analyzer
+      Significance Calculator
     </button>
   </div>
 </div>
