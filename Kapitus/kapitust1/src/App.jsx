@@ -372,34 +372,60 @@ export default function ABTestAnalyzer() {
   <label className="block text-gray-700 mb-2 font-medium">Number of Variants (including Control)</label>
   
   <div className="flex items-center space-x-3">
-    {/* Minus Button */}
-    <button
-      type="button"
-      onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
-      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
+  {/* Minus Button */}
+  <button
+    type="button"
+    onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
+    className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition-all duration-200 ease-in-out cursor-pointer transform hover:scale-105 hover:shadow-md"
+  >
+    <svg 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      className="transition-transform duration-200 ease-in-out hover:scale-110"
     >
-      −
-    </button>
+      <path 
+        d="M5 12h14" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round"
+      />
+    </svg>
+  </button>
 
-    {/* Number Display */}
-    <input
-      type="number"
-      min="2"
-      max="5"
-      value={numVariants}
-      onChange={(e) => handleVariantCountChange(e.target.value)}
-      className="w-20 text-center p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
-    />
+  {/* Number Display */}
+  <input
+    type="number"
+    min="2"
+    max="5"
+    value={numVariants}
+    onChange={(e) => handleVariantCountChange(e.target.value)}
+    className="w-20 text-center p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-200 shadow-sm hover:shadow-md hover:border-blue-300 cursor-pointer"
+  />
 
-    {/* Plus Button */}
-    <button
-      type="button"
-      onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
-      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
+  {/* Plus Button */}
+  <button
+    type="button"
+    onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
+    className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition-all duration-200 ease-in-out cursor-pointer transform hover:scale-105 hover:shadow-md"
+  >
+    <svg 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      className="transition-transform duration-200 ease-in-out hover:scale-110"
     >
-      +
-    </button>
-  </div>
+      <path 
+        d="M12 5v14m-7-7h14" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round"
+      />
+    </svg>
+  </button>
+</div>
 
 </div>
 
