@@ -612,33 +612,71 @@ export default function ABTestAnalyzer() {
   <div className="flex items-center space-x-3">
     {/* Minus Button */}
     <button
-      type="button"
-      onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
-      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
-      disabled={numVariants <= 2}
-    >
-      −
-    </button>
-
-    {/* Number Display */}
-    <input
-      type="number"
-      min="2"
-      max="5"
-      value={numVariants}
-      onChange={(e) => handleVariantCountChange(e.target.value)}
-      className="w-20 text-center p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-md"
+  type="button"
+  onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
+  className={`p-2 rounded-lg font-bold transition-all duration-200 ease-in-out transform ${
+    numVariants <= 2 
+      ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+      : 'bg-blue-100 hover:bg-blue-200 text-blue-700 cursor-pointer hover:scale-105 hover:shadow-md'
+  }`}
+  disabled={numVariants <= 2}
+>
+  <svg 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    className={`transition-transform duration-200 ease-in-out ${
+      numVariants <= 2 ? '' : 'hover:scale-110'
+    }`}
+  >
+    <path 
+      d="M5 12h14" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round"
     />
+  </svg>
+</button>
 
-    {/* Plus Button */}
-    <button
-      type="button"
-      onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
-      className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition"
-      disabled={numVariants >= 5}
-    >
-      +
-    </button>
+{/* Number Display */}
+<input
+  type="number"
+  min="2"
+  max="5"
+  value={numVariants}
+  onChange={(e) => handleVariantCountChange(e.target.value)}
+  className="w-20 text-center p-3 bg-white/80 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-200 shadow-md hover:shadow-lg hover:border-blue-300 cursor-pointer"
+/>
+
+{/* Plus Button */}
+<button
+  type="button"
+  onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
+  className={`p-2 rounded-lg font-bold transition-all duration-200 ease-in-out transform ${
+    numVariants >= 5 
+      ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+      : 'bg-blue-100 hover:bg-blue-200 text-blue-700 cursor-pointer hover:scale-105 hover:shadow-md'
+  }`}
+  disabled={numVariants >= 5}
+>
+  <svg 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    className={`transition-transform duration-200 ease-in-out ${
+      numVariants >= 5 ? '' : 'hover:scale-110'
+    }`}
+  >
+    <path 
+      d="M12 5v14m-7-7h14" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round"
+    />
+  </svg>
+</button>
   </div>
 
 </div>
