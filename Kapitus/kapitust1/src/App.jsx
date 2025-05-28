@@ -541,9 +541,26 @@ export default function ABTestAnalyzer() {
       <div className="mt-8 flex justify-center">
         <button
   onClick={handleCalculateDuration}
-  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 ease-in-out"
+  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer group"
 >
-  🚀 Calculate Test Duration
+  <span className="inline-flex items-center space-x-2">
+    <svg 
+      width="20" 
+      height="20" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      className="transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+    >
+      <path 
+        d="M5 12h14m-7-7 7 7-7 7" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
+    </svg>
+    <span>Calculate Test Duration</span>
+  </span>
 </button>
       </div>
 
@@ -750,11 +767,42 @@ export default function ABTestAnalyzer() {
       {/* Analyze Button */}
       <div className="mt-12 flex justify-center">
         <button
-          onClick={handleAnalyzeResults}
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300"
-        >
-          📊 Analyze Results
-        </button>
+  onClick={handleAnalyzeResults}
+  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer group"
+>
+  <span className="inline-flex items-center space-x-2">
+    <svg 
+      width="20" 
+      height="20" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      className="transition-transform duration-300 ease-in-out group-hover:scale-110"
+    >
+      <path 
+        d="M3 3v18h18" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
+      <path 
+        d="M9 9l4-4 4 4" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
+      <path 
+        d="M13 13l4 4" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
+    </svg>
+    <span>Analyze Results</span>
+  </span>
+</button>
       </div>
 
     </div>
