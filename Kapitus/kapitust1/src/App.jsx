@@ -278,31 +278,32 @@ export default function ABTestAnalyzer() {
   {/* Navigation Tabs */}
   <div className="flex flex-col md:flex-row justify-center gap-4">
     <button 
-      className={`w-full md:w-auto py-3 px-6 rounded-full font-semibold transition duration-300 ease-in-out ${
-        showDurationSection 
-          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl' 
-          : 'bg-white/50 text-gray-700 border border-blue-300 hover:bg-blue-100 shadow-md'
-      }`}
-      onClick={() => {
-        setShowDurationSection(true);
-        setShowAnalysisSection(false);
-      }}
-    >
-      Test Duration Calculator
-    </button>
-    <button 
-      className={`w-full md:w-auto py-3 px-6 rounded-full font-semibold transition duration-300 ease-in-out ${
-        showAnalysisSection 
-          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl' 
-          : 'bg-white/50 text-gray-700 border border-blue-300 hover:bg-blue-100 shadow-md'
-      }`}
-      onClick={() => {
-        setShowDurationSection(false);
-        setShowAnalysisSection(true);
-      }}
-    >
-      Significance Calculator
-    </button>
+  className={`w-full md:w-auto py-3 px-6 rounded-full font-semibold transition-all duration-300 ease-in-out cursor-pointer transform hover:scale-105 ${
+    showDurationSection 
+      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700' 
+      : 'bg-white/50 text-gray-700 border border-blue-300 hover:bg-blue-100 hover:border-blue-400 shadow-md hover:shadow-lg hover:text-blue-800'
+  }`}
+  onClick={() => {
+    setShowDurationSection(true);
+    setShowAnalysisSection(false);
+  }}
+>
+  Test Duration Calculator
+</button>
+
+<button 
+  className={`w-full md:w-auto py-3 px-6 rounded-full font-semibold transition-all duration-300 ease-in-out cursor-pointer transform hover:scale-105 ${
+    showAnalysisSection 
+      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700' 
+      : 'bg-white/50 text-gray-700 border border-blue-300 hover:bg-blue-100 hover:border-blue-400 shadow-md hover:shadow-lg hover:text-blue-800'
+  }`}
+  onClick={() => {
+    setShowDurationSection(false);
+    setShowAnalysisSection(true);
+  }}
+>
+  Significance Calculator
+</button>
   </div>
 </div>
       
