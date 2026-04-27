@@ -454,7 +454,7 @@ export default function ABTestAnalyzer() {
                 className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
               >
                 <option value="one_tailed" id="one-tailed-test">One-Tailed (Detect Improvements Only)</option>
-                <option value="two_tailed id="twotailed-test"">Two-Tailed (Detect Any Difference)</option>
+                <option value="two_tailed id="twotailed-test">Two-Tailed (Detect Any Difference)</option>
               </select>
               <p className="mt-1 text-xs text-gray-500">
                 {testType === 'one_tailed' 
