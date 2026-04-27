@@ -331,6 +331,7 @@ export default function ABTestAnalyzer() {
               <label className="block text-gray-700 mb-2 font-medium">Daily Visitors (all variants)</label>
               <input
                 type="number"
+                id="input-daily-visitors"
                 min="1"
                 value={dailyVisitors}
                 onChange={(e) => setDailyVisitors(parseInt(e.target.value))}
@@ -343,6 +344,7 @@ export default function ABTestAnalyzer() {
               <label className="block text-gray-700 mb-2 font-medium">Baseline Conversion Rate (%)</label>
               <input
                 type="number"
+                id="input-cvr"
                 min="0.1"
                 max="100"
                 step="0.1"
@@ -357,6 +359,7 @@ export default function ABTestAnalyzer() {
               <label className="block text-gray-700 mb-2 font-medium">Minimum Detectable Effect (Expected Uplift %)</label>
               <input
                 type="number"
+                id="input-expected-uplift"
                 min="0.1"
                 max="100"
                 step="0.1"
@@ -375,6 +378,7 @@ export default function ABTestAnalyzer() {
   {/* Minus Button */}
   <button
     type="button"
+    id="input-minus"
     onClick={() => handleVariantCountChange(Math.max(2, numVariants - 1))}
     className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition-all duration-200 ease-in-out cursor-pointer transform hover:scale-105 hover:shadow-md"
   >
@@ -397,6 +401,7 @@ export default function ABTestAnalyzer() {
   {/* Number Display */}
   <input
     type="number"
+    id="input-variants-count"
     min="2"
     max="5"
     value={numVariants}
@@ -407,6 +412,7 @@ export default function ABTestAnalyzer() {
   {/* Plus Button */}
   <button
     type="button"
+    id="plus-button"
     onClick={() => handleVariantCountChange(Math.min(5, numVariants + 1))}
     className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold rounded-lg transition-all duration-200 ease-in-out cursor-pointer transform hover:scale-105 hover:shadow-md"
   >
@@ -442,12 +448,13 @@ export default function ABTestAnalyzer() {
             <div>
               <label className="block text-gray-700 mb-2 font-medium">Test Type</label>
               <select
+                id="testtype"
                 value={testType}
                 onChange={(e) => setTestType(e.target.value)}
                 className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
               >
-                <option value="one_tailed">One-Tailed (Detect Improvements Only)</option>
-                <option value="two_tailed">Two-Tailed (Detect Any Difference)</option>
+                <option value="one_tailed" id="one-tailed-test">One-Tailed (Detect Improvements Only)</option>
+                <option value="two_tailed id="twotailed-test"">Two-Tailed (Detect Any Difference)</option>
               </select>
               <p className="mt-1 text-xs text-gray-500">
                 {testType === 'one_tailed' 
@@ -460,6 +467,7 @@ export default function ABTestAnalyzer() {
             <div>
               <label className="block text-gray-700 mb-2 font-medium">Confidence Level (%)</label>
               <select
+                id="input-confidence"
                 value={confidenceLevel}
                 onChange={(e) => setConfidenceLevel(parseInt(e.target.value))}
                 className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
@@ -476,6 +484,7 @@ export default function ABTestAnalyzer() {
             <div>
               <label className="block text-gray-700 mb-2 font-medium">Statistical Power (%)</label>
               <select
+                id="input-stat-power"
                 value={power}
                 onChange={(e) => setPower(parseInt(e.target.value))}
                 className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition shadow-sm"
@@ -491,7 +500,7 @@ export default function ABTestAnalyzer() {
           </div>
 
           {/* Expandable Formula Section */}
-          <details className="mt-8 bg-blue-50/70 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
+          <details id="duration-details" className="mt-8 bg-blue-50/70 p-4 rounded-lg backdrop-blur-sm shadow-inner cursor-pointer">
   <summary className="font-semibold text-blue-700 cursor-pointer">
     📈 View Test Duration Formula & Terms
   </summary>
